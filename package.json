@@ -1,0 +1,30 @@
+{
+  "name": "todo-note",
+  "displayName": "Todo Note",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "main": "./src/cjs-wrapper.cjs",
+  "contributes": {
+    "commands": [
+      {
+        "command": "todo-note.helloWorld",
+        "title": "Hello World"
+      }
+    ]
+  },
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "todo-note": "file:"
+  },
+  "devDependencies": {
+    "@types/node": "20.x",
+    "@types/vscode": "^1.96.0"
+  }
+}
