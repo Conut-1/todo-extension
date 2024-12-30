@@ -1,6 +1,4 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const vscode = require("vscode");
+import vscode from "./vscode-module.js";
 
 /**
  * @param {vscode.ExtensionContext} context
