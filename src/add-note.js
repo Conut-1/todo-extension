@@ -1,5 +1,8 @@
 import vscode from "./vscode-module.js";
 
-export function addNote() {
+/**
+ * @param {vscode.ExtensionContext} context
+ */
+export function addNote(context) {
   vscode.window.showInformationMessage("add note");
 }
