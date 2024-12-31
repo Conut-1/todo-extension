@@ -8,6 +8,23 @@
   },
   "main": "./src/cjs-wrapper.cjs",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "todo-note-explorer",
+          "title": "Todo Note",
+          "icon": "$(star)"
+        }
+      ]
+    },
+    "views": {
+      "todo-note-explorer": [
+        {
+          "id": "todo-note-view",
+          "name": "Todo Note"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "todo-note.helloWorld",
