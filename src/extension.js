@@ -12,7 +12,10 @@ export function activate(context) {
 
   const addNoteCommand = vscode.commands.registerCommand(
     "todo-note.addNote",
-    () => addNote(context)
+    async () => {
+      await addNote(context);
+      testTreeDataProvider.refresh();
+    }
   );
   const refreshNoteCommand = vscode.commands.registerCommand(
     "todo-note.refreshNote",
