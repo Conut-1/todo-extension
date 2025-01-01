@@ -29,6 +29,10 @@
       {
         "command": "todo-note.addNote",
         "title": "Add note"
+      },
+      {
+        "command": "todo-note.refreshNote",
+        "title": "Refresh note"
       }
     ]
   },

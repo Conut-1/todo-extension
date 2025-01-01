@@ -8,17 +8,26 @@ import { TestTreeDataProvider } from "./test-tree-data-provider.js";
  * @param {vscode.ExtensionContext} context
  */
 export function activate(context) {
+  const testTreeDataProvider = new TestTreeDataProvider(context);
+
   const addNoteCommand = vscode.commands.registerCommand(
     "todo-note.addNote",
-    () => addNote(context)
+    async () => {
+      await addNote(context);
+      testTreeDataProvider.refresh();
+    }
+  );
+  const refreshNoteCommand = vscode.commands.registerCommand(
+    "todo-note.refreshNote",
+    () => testTreeDataProvider.refresh()
   );
 
-  const testTreeDataProvider = vscode.window.registerTreeDataProvider(
+  const testTree = vscode.window.registerTreeDataProvider(
     "todo-note-view",
-    new TestTreeDataProvider()
+    testTreeDataProvider
   );
 
-  context.subscriptions.push(addNoteCommand, testTreeDataProvider);
+  context.subscriptions.push(addNoteCommand, refreshNoteCommand, testTree);
 }
 
 export function deactivate() {}
