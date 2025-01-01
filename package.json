@@ -27,8 +27,8 @@
     },
     "commands": [
       {
-        "command": "todo-note.helloWorld",
-        "title": "Hello World"
+        "command": "todo-note.addNote",
+        "title": "Add note"
       }
     ]
   },

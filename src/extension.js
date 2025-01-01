@@ -1,16 +1,16 @@
 import vscode from "./vscode-module.js";
+
+import { addNote } from "./add-note.js";
+
 import { TestTreeDataProvider } from "./test-tree-data-provider.js";
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 export function activate(context) {
-  console.log("Todo Note is now active!");
-  const disposable = vscode.commands.registerCommand(
-    "todo-note.helloWorld",
-    function () {
-      vscode.window.showInformationMessage("Hello World from Todo Note!");
-    }
+  const addNoteCommand = vscode.commands.registerCommand(
+    "todo-note.addNote",
+    () => addNote(context)
   );
 
   const testTreeDataProvider = vscode.window.registerTreeDataProvider(
@@ -18,7 +18,7 @@ export function activate(context) {
     new TestTreeDataProvider()
   );
 
-  context.subscriptions.push(disposable, testTreeDataProvider);
+  context.subscriptions.push(addNoteCommand, testTreeDataProvider);
 }
 
 export function deactivate() {}
