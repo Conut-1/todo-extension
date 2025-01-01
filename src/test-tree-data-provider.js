@@ -1,6 +1,11 @@
 import vscode from "./vscode-module.js";
 
 export class TestTreeDataProvider {
+  constructor() {
+    this._onDidChangeTreeData = new vscode.EventEmitter();
+    this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+  }
+
   getTreeItem(element) {
     return element;
   }
@@ -29,5 +34,9 @@ export class TestTreeDataProvider {
       ];
     }
     return [];
+  }
+
+  refresh() {
+    this._onDidChangeTreeData.fire();
   }
 }
