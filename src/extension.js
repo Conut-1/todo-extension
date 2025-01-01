@@ -8,7 +8,7 @@ import { TestTreeDataProvider } from "./test-tree-data-provider.js";
  * @param {vscode.ExtensionContext} context
  */
 export function activate(context) {
-  const testTreeDataProvider = new TestTreeDataProvider();
+  const testTreeDataProvider = new TestTreeDataProvider(context);
 
   const addNoteCommand = vscode.commands.registerCommand(
     "todo-note.addNote",

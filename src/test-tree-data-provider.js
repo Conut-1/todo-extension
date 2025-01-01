@@ -1,39 +1,24 @@
 import vscode from "./vscode-module.js";
+import { join } from "path";
+import { readFile } from "fs/promises";
 
 export class TestTreeDataProvider {
-  constructor() {
+  constructor(context) {
     this._onDidChangeTreeData = new vscode.EventEmitter();
     this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+    this.context = context;
   }
 
   getTreeItem(element) {
     return element;
   }
 
-  getChildren(element) {
+  async getChildren(element) {
     if (!element) {
-      return [
-        new vscode.TreeItem(
-          "Parent 1",
-          vscode.TreeItemCollapsibleState.Collapsed
-        ),
-        new vscode.TreeItem(
-          "Parent 2",
-          vscode.TreeItemCollapsibleState.Collapsed
-        ),
-      ];
-    } else if (element.label === "Parent 1") {
-      return [
-        new vscode.TreeItem("Child 1-1"),
-        new vscode.TreeItem("Child 1-2"),
-      ];
-    } else if (element.label === "Parent 2") {
-      return [
-        new vscode.TreeItem("Child 2-1"),
-        new vscode.TreeItem("Child 2-2"),
-      ];
+      const filePath = join(this.context.globalStorageUri.fsPath, "note");
+      const content = await readFile(filePath);
+      return [new vscode.TreeItem(content.toString())];
     }
-    return [];
   }
 
   refresh() {
