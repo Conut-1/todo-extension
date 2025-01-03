@@ -34,7 +34,16 @@
         "command": "todo-note.refreshNote",
         "title": "Refresh note"
       }
-    ]
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "todo-note.refreshNote",
+          "when": "view == todo-note-view",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "type": "module",
   "scripts": {
