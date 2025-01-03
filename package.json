@@ -32,7 +32,8 @@
       },
       {
         "command": "todo-note.refreshNote",
-        "title": "Refresh note"
+        "title": "Refresh note",
+        "icon": "$(refresh)"
       }
     ],
     "menus": {
