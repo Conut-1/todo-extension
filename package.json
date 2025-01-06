@@ -32,9 +32,19 @@
       },
       {
         "command": "todo-note.refreshNote",
-        "title": "Refresh note"
+        "title": "Refresh note",
+        "icon": "$(refresh)"
       }
-    ]
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "todo-note.refreshNote",
+          "when": "view == todo-note-view",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "type": "module",
   "scripts": {
