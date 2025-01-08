@@ -7,7 +7,7 @@ import { initDB, closeDB } from "./note-db.js";
  * @param {vscode.ExtensionContext} context
  */
 export function activate(context) {
-  initDB();
+  initDB(context.globalStorageUri);
 
   const testTreeDataProvider = new TestTreeDataProvider(context);
 

@@ -1,13 +1,16 @@
 import Database from "better-sqlite3";
+import { join } from "path";
 
 /**
  * @type {Database.Database}
  */
 let db = null;
 
-export function initDB() {
+export function initDB(dbUri) {
   if (db) return;
-  db = new Database("todo-note.db", { verbose: console.log });
+  db = new Database(join(dbUri.fsPath, "todo-note.db"), {
+    verbose: console.log,
+  });
 
   db.exec(`
     CREATE TABLE IF NOT EXISTS notes (
