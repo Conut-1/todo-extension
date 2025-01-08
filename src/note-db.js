@@ -1,5 +1,8 @@
 import Database from "better-sqlite3";
 
+/**
+ * @type {Database.Database}
+ */
 let db = null;
 
 export function initDB() {
@@ -18,4 +21,12 @@ export function initDB() {
 export function closeDB() {
   if (db) db.close();
   db = null;
+}
+
+export function getNotes(path) {
+  const getNotesStmt = db.prepare(`
+    SELECT * FROM notes WHERE path LIKE ?;
+  `);
+  const notes = getNotesStmt.all(`${path}%`);
+  return notes;
 }
