@@ -30,3 +30,10 @@ export function getNotes(path) {
   const notes = getNotesStmt.all(`${path}%`);
   return notes;
 }
+
+export function insertNote(filePath, note) {
+  const insertNoteStmt = db.prepare(`
+    INSERT INTO notes (path, note) VALUES (?, ?)
+  `);
+  insertNoteStmt.run(filePath, note);
+}
