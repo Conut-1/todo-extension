@@ -7,6 +7,9 @@ import vscode from "./vscode-module.js";
  */
 let db = null;
 
+/**
+ * @param {vscode.Uri} dbUri
+ */
 export async function initDB(dbUri) {
   await vscode.workspace.fs.createDirectory(dbUri);
   if (db) return;
