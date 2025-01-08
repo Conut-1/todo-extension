@@ -1,12 +1,14 @@
 import Database from "better-sqlite3";
 import { join } from "path";
+import vscode from "./vscode-module.js";
 
 /**
  * @type {Database.Database}
  */
 let db = null;
 
-export function initDB(dbUri) {
+export async function initDB(dbUri) {
+  await vscode.workspace.fs.createDirectory(dbUri);
   if (db) return;
   db = new Database(join(dbUri.fsPath, "todo-note.db"), {
     verbose: console.log,

@@ -1,11 +1,7 @@
 import vscode from "./vscode-module.js";
 import { insertNote } from "./note-db.js";
 
-/**
- * @param {vscode.ExtensionContext} context
- */
-export async function addNote(context) {
-  await vscode.workspace.fs.createDirectory(context.globalStorageUri);
+export async function addNote() {
   const input = await vscode.window.showInputBox({
     placeHolder: "Type your input here",
     prompt: "Enter something:",

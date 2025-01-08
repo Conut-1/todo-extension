@@ -6,15 +6,15 @@ import { initDB, closeDB } from "./note-db.js";
 /**
  * @param {vscode.ExtensionContext} context
  */
-export function activate(context) {
-  initDB(context.globalStorageUri);
+export async function activate(context) {
+  await initDB(context.globalStorageUri);
 
   const testTreeDataProvider = new TestTreeDataProvider(context);
 
   const addNoteCommand = vscode.commands.registerCommand(
     "todo-note.addNote",
     async () => {
-      await addNote(context);
+      await addNote();
       testTreeDataProvider.refresh();
     }
   );
