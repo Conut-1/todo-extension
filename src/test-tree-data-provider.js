@@ -1,6 +1,5 @@
 import vscode from "./vscode-module.js";
-import { join } from "path";
-import { readFile } from "fs/promises";
+import { getNotes } from "./note-db.js";
 
 /**
  * @implements {vscode.TreeDataProvider}
@@ -22,11 +21,12 @@ export class TestTreeDataProvider {
     return element;
   }
 
-  async getChildren(element) {
+  getChildren(element) {
     if (!element) {
-      const filePath = join(this.context.globalStorageUri.fsPath, "note");
-      const content = await readFile(filePath);
-      return [new vscode.TreeItem(content.toString())];
+      const notes = getNotes(vscode.workspace.workspaceFolders[0].uri.fsPath);
+      return notes.map((note) => {
+        return new vscode.TreeItem(note.note);
+      });
     }
   }
 

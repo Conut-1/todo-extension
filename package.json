@@ -51,6 +51,7 @@
     "test": "node ./test/run-test.js"
   },
   "dependencies": {
+    "better-sqlite3": "^11.7.2",
     "todo-note": "file:"
   },
   "devDependencies": {

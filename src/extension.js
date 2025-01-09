@@ -1,19 +1,20 @@
 import vscode from "./vscode-module.js";
-
 import { addNote } from "./add-note.js";
-
 import { TestTreeDataProvider } from "./test-tree-data-provider.js";
+import { initDB, closeDB } from "./note-db.js";
 
 /**
  * @param {vscode.ExtensionContext} context
  */
-export function activate(context) {
+export async function activate(context) {
+  await initDB(context.globalStorageUri);
+
   const testTreeDataProvider = new TestTreeDataProvider(context);
 
   const addNoteCommand = vscode.commands.registerCommand(
     "todo-note.addNote",
     async () => {
-      await addNote(context);
+      await addNote();
       testTreeDataProvider.refresh();
     }
   );
@@ -30,4 +31,6 @@ export function activate(context) {
   context.subscriptions.push(addNoteCommand, refreshNoteCommand, testTree);
 }
 
-export function deactivate() {}
+export function deactivate() {
+  closeDB();
+}
