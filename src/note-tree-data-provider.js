@@ -4,7 +4,7 @@ import { getNotes } from "./note-db.js";
 /**
  * @implements {vscode.TreeDataProvider}
  */
-export class TestTreeDataProvider {
+export class NoteTreeDataProvider {
   /**
    * @param {vscode.ExtensionContext} context
    */
