@@ -23,14 +23,24 @@ export class NoteTreeDataProvider {
 
   getChildren(element) {
     if (!element) {
-      const notes = getNotes(vscode.workspace.workspaceFolders[0].uri.fsPath);
-      return notes.map((note) => {
-        return new vscode.TreeItem(note.note);
-      });
+      return makeTree();
     }
   }
 
   refresh() {
     this._onDidChangeTreeData.fire();
+  }
+}
+
+function makeTree() {
+  const notes = getNotes(vscode.workspace.workspaceFolders[0].uri.fsPath);
+  return notes.map((note) => {
+    return new NoteNode(note.note);
+  });
+}
+
+class NoteNode extends vscode.TreeItem {
+  constructor(label, collapsibleState) {
+    super(label, collapsibleState);
   }
 }
