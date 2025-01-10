@@ -25,6 +25,7 @@ export class NoteTreeDataProvider {
     if (!element) {
       return makeTree();
     }
+    return element.children;
   }
 
   refresh() {
@@ -34,8 +35,23 @@ export class NoteTreeDataProvider {
 
 function makeTree() {
   const notes = getNotes(vscode.workspace.workspaceFolders[0].uri.fsPath);
-  return notes.map((note) => {
-    return new NoteNode(note.note);
+  const groupedNotes = notes.reduce((groupedNotes, note) => {
+    const key = note.path;
+    if (!groupedNotes[key]) {
+      groupedNotes[key] = [];
+    }
+    groupedNotes[key].push(note);
+    return groupedNotes;
+  }, {});
+  return Object.keys(groupedNotes).map((path) => {
+    const noteNode = new NoteNode(
+      path,
+      vscode.TreeItemCollapsibleState.Expanded
+    );
+    groupedNotes[path].forEach((note) => {
+      noteNode.children.push(new NoteNode(note.note));
+    });
+    return noteNode;
   });
 }
 
@@ -46,5 +62,6 @@ class NoteNode extends vscode.TreeItem {
    */
   constructor(label, collapsibleState) {
     super(label, collapsibleState);
+    this.children = [];
   }
 }
