@@ -3,6 +3,12 @@ import { join } from "path";
 import vscode from "./vscode-module.js";
 
 /**
+ * @typedef {Object} Note
+ * @property {string} path
+ * @property {string} note
+ */
+
+/**
  * @type {Database.Database}
  */
 let db = null;
@@ -31,6 +37,10 @@ export function closeDB() {
   db = null;
 }
 
+/**
+ * @param {string} path
+ * @returns {Note[]}
+ */
 export function getNotes(path) {
   const getNotesStmt = db.prepare(`
     SELECT * FROM notes WHERE path LIKE ?;
