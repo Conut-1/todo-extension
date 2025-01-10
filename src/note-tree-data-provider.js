@@ -40,6 +40,10 @@ function makeTree() {
 }
 
 class NoteNode extends vscode.TreeItem {
+  /**
+   * @param {string | vscode.TreeItemLabel} label
+   * @param {vscode.TreeItemCollapsibleState} [collapsibleState]
+   */
   constructor(label, collapsibleState) {
     super(label, collapsibleState);
   }
