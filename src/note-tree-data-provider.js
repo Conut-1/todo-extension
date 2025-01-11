@@ -1,3 +1,4 @@
+import { relative } from "path";
 import vscode from "./vscode-module.js";
 import { getNotes } from "./note-db.js";
 
@@ -47,6 +48,11 @@ function makeTree() {
     const noteNode = new NoteNode(
       path,
       vscode.TreeItemCollapsibleState.Expanded
+    );
+    noteNode.tooltip = noteNode.label;
+    noteNode.label = relative(
+      vscode.workspace.workspaceFolders[0].uri.fsPath,
+      path
     );
     groupedNotes[path].forEach((note) => {
       noteNode.children.push(new NoteNode(note.note));
