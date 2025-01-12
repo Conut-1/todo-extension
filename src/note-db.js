@@ -55,3 +55,10 @@ export function insertNote(filePath, note) {
   `);
   insertNoteStmt.run(filePath, note);
 }
+
+export function deleteNote(noteId) {
+  const deleteNoteStmt = db.prepare(`
+    DELETE FROM notes WHERE id = ?
+  `);
+  deleteNoteStmt.run(noteId);
+}
