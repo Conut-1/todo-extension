@@ -54,6 +54,7 @@ function makeTree() {
       vscode.workspace.workspaceFolders[0].uri.fsPath,
       path
     );
+    noteNode.iconPath = vscode.ThemeIcon.File;
     groupedNotes[path].forEach((note) => {
       noteNode.children.push(new NoteNode(note.note));
     });
