@@ -25,7 +25,10 @@ export async function activate(context) {
   );
   const deleteNoteCommand = vscode.commands.registerCommand(
     "todo-note.deleteNote",
-    deleteNote
+    (noteNode) => {
+      deleteNote(noteNode);
+      noteTreeDataProvider.refresh();
+    }
   );
 
   const noteTree = vscode.window.registerTreeDataProvider(
