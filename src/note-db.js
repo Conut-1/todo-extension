@@ -4,6 +4,7 @@ import vscode from "./vscode-module.js";
 
 /**
  * @typedef {Object} Note
+ * @property {number} id
  * @property {string} path
  * @property {string} note
  */

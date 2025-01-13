@@ -45,30 +45,35 @@ function makeTree() {
     return groupedNotes;
   }, {});
   return Object.keys(groupedNotes).map((path) => {
-    const noteNode = new NoteNode(
-      path,
+    const fileNode = new FileNode(path);
+    groupedNotes[path].forEach((note) => {
+      fileNode.children.push(new NoteNode(note));
+    });
+    return fileNode;
+  });
+}
+
+class FileNode extends vscode.TreeItem {
+  /**
+   * @param {string} filePath
+   */
+  constructor(filePath) {
+    super(
+      relative(vscode.workspace.workspaceFolders[0].uri.fsPath, filePath),
       vscode.TreeItemCollapsibleState.Expanded
     );
-    noteNode.tooltip = noteNode.label;
-    noteNode.label = relative(
-      vscode.workspace.workspaceFolders[0].uri.fsPath,
-      path
-    );
-    noteNode.iconPath = vscode.ThemeIcon.File;
-    groupedNotes[path].forEach((note) => {
-      noteNode.children.push(new NoteNode(note.note));
-    });
-    return noteNode;
-  });
+    this.children = [];
+    this.tooltip = filePath;
+    this.iconPath = vscode.ThemeIcon.File;
+  }
 }
 
 class NoteNode extends vscode.TreeItem {
   /**
-   * @param {string | vscode.TreeItemLabel} label
-   * @param {vscode.TreeItemCollapsibleState} [collapsibleState]
+   * @param {import("./note-db.js").Note} note
    */
-  constructor(label, collapsibleState) {
-    super(label, collapsibleState);
-    this.children = [];
+  constructor(note) {
+    super(note.note);
+    this.noteId = note.id;
   }
 }
