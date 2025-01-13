@@ -75,5 +75,6 @@ class NoteNode extends vscode.TreeItem {
   constructor(note) {
     super(note.note);
     this.noteId = note.id;
+    this.contextValue = "note";
   }
 }
