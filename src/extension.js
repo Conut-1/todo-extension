@@ -1,5 +1,6 @@
 import vscode from "./vscode-module.js";
 import { addNote } from "./add-note.js";
+import { deleteNote } from "./delete-note.js";
 import { NoteTreeDataProvider } from "./note-tree-data-provider.js";
 import { initDB, closeDB } from "./note-db.js";
 
@@ -22,13 +23,25 @@ export async function activate(context) {
     "todo-note.refreshNote",
     () => noteTreeDataProvider.refresh()
   );
+  const deleteNoteCommand = vscode.commands.registerCommand(
+    "todo-note.deleteNote",
+    (noteNode) => {
+      deleteNote(noteNode);
+      noteTreeDataProvider.refresh();
+    }
+  );
 
   const noteTree = vscode.window.registerTreeDataProvider(
     "todo-note-view",
     noteTreeDataProvider
   );
 
-  context.subscriptions.push(addNoteCommand, refreshNoteCommand, noteTree);
+  context.subscriptions.push(
+    addNoteCommand,
+    refreshNoteCommand,
+    deleteNoteCommand,
+    noteTree
+  );
 }
 
 export function deactivate() {

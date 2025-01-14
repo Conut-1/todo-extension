@@ -34,6 +34,11 @@
         "command": "todo-note.refreshNote",
         "title": "Refresh note",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "todo-note.deleteNote",
+        "title": "Delete note",
+        "icon": "$(close)"
       }
     ],
     "menus": {
@@ -42,6 +47,19 @@
           "command": "todo-note.refreshNote",
           "when": "view == todo-note-view",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "todo-note.deleteNote",
+          "when": "view == todo-note-view && viewItem == 'note'",
+          "group": "inline"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "todo-note.deleteNote",
+          "when": "false"
         }
       ]
     }

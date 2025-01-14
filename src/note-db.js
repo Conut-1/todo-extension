@@ -4,6 +4,7 @@ import vscode from "./vscode-module.js";
 
 /**
  * @typedef {Object} Note
+ * @property {number} id
  * @property {string} path
  * @property {string} note
  */
@@ -54,4 +55,11 @@ export function insertNote(filePath, note) {
     INSERT INTO notes (path, note) VALUES (?, ?)
   `);
   insertNoteStmt.run(filePath, note);
+}
+
+export function deleteNote(noteId) {
+  const deleteNoteStmt = db.prepare(`
+    DELETE FROM notes WHERE id = ?
+  `);
+  deleteNoteStmt.run(noteId);
 }
