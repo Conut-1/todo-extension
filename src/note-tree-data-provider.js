@@ -76,5 +76,10 @@ class NoteNode extends vscode.TreeItem {
     super(note.note);
     this.noteId = note.id;
     this.contextValue = "note";
+    this.command = {
+      title: "move to note",
+      command: "vscode.open",
+      arguments: [vscode.Uri.from({ path: note.path })],
+    };
   }
 }
