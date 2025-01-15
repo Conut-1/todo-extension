@@ -28,7 +28,8 @@ export async function initDB(dbUri) {
     CREATE TABLE IF NOT EXISTS notes (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       path TEXT NOT NULL,
-      note TEXT NOT NULL
+      note TEXT NOT NULL,
+      line INTERGER NOT NULL
     );
   `);
 }
@@ -50,11 +51,11 @@ export function getNotes(path) {
   return notes;
 }
 
-export function insertNote(filePath, note) {
+export function insertNote(filePath, note, line) {
   const insertNoteStmt = db.prepare(`
-    INSERT INTO notes (path, note) VALUES (?, ?)
+    INSERT INTO notes (path, note, line) VALUES (?, ?, ?)
   `);
-  insertNoteStmt.run(filePath, note);
+  insertNoteStmt.run(filePath, note, line ? line : 0);
 }
 
 export function deleteNote(noteId) {
