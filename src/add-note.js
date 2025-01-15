@@ -6,6 +6,7 @@ export async function addNote() {
     placeHolder: "Type your input here",
     prompt: "Enter something:",
   });
+  if (!input) return;
   const editor = vscode.window.activeTextEditor;
   if (editor && editor.document.uri.scheme === "file") {
     const filePath = editor.document.uri.fsPath;
