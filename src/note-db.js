@@ -7,6 +7,7 @@ import vscode from "./vscode-module.js";
  * @property {number} id
  * @property {string} path
  * @property {string} note
+ * @property {number} line
  */
 
 /**
