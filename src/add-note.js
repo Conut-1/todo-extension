@@ -6,10 +6,11 @@ export async function addNote() {
     placeHolder: "Type your input here",
     prompt: "Enter something:",
   });
+  if (!input) return;
   const editor = vscode.window.activeTextEditor;
   if (editor && editor.document.uri.scheme === "file") {
     const filePath = editor.document.uri.fsPath;
-    insertNote(filePath, input);
+    insertNote(filePath, input, editor.selection.active.line);
     vscode.window.showInformationMessage(`add note: ${input}`);
   }
 }

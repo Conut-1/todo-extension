@@ -79,7 +79,10 @@ class NoteNode extends vscode.TreeItem {
     this.command = {
       title: "move to note",
       command: "vscode.open",
-      arguments: [vscode.Uri.from({ path: note.path })],
+      arguments: [
+        vscode.Uri.from({ path: note.path }),
+        { selection: new vscode.Range(note.line, 0, note.line, 0) },
+      ],
     };
   }
 }
