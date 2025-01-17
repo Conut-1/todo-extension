@@ -58,12 +58,13 @@ class FileNode extends vscode.TreeItem {
    * @param {string} filePath
    */
   constructor(filePath) {
-    super(
-      relative(vscode.workspace.workspaceFolders[0].uri.fsPath, filePath),
-      vscode.TreeItemCollapsibleState.Expanded
-    );
+    super(vscode.Uri.file(filePath), vscode.TreeItemCollapsibleState.Expanded);
     this.children = [];
     this.tooltip = filePath;
+    this.label = relative(
+      vscode.workspace.workspaceFolders[0].uri.fsPath,
+      filePath
+    );
     this.iconPath = vscode.ThemeIcon.File;
   }
 }
