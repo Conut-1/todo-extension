@@ -1,7 +1,7 @@
 {
   "name": "todo-note",
   "displayName": "Todo Note",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "ch-kim",
   "engines": {
     "vscode": "^1.96.0"
