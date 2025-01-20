@@ -1,4 +1,4 @@
-import { relative } from "path";
+import { basename } from "path";
 import vscode from "./vscode-module.js";
 import { getNotes } from "./note-db.js";
 
@@ -58,12 +58,10 @@ class FileNode extends vscode.TreeItem {
    * @param {string} filePath
    */
   constructor(filePath) {
-    super(
-      relative(vscode.workspace.workspaceFolders[0].uri.fsPath, filePath),
-      vscode.TreeItemCollapsibleState.Expanded
-    );
+    super(vscode.Uri.file(filePath), vscode.TreeItemCollapsibleState.Expanded);
     this.children = [];
     this.tooltip = filePath;
+    this.label = basename(filePath);
     this.iconPath = vscode.ThemeIcon.File;
   }
 }
